@@ -13,6 +13,7 @@ class Clients {
       ...this.clients,
       [clientId]: {
         id: clientId,
+        belongsTo: '',
         socket,
       }
     }
@@ -54,6 +55,30 @@ class Clients {
 
     return this.clients = { ...clients, [oldClientId]: { ...client, id: oldClientId}};
   };
+
+  /**
+   * Update client
+   * @param clientId
+   * @param data
+   */
+  updateClient = (clientId, data) => {
+    this.clients = {
+      ...this.clients,
+      [clientId]: {
+        ...this.getClient(clientId),
+        ...data
+      }
+    }
+  }
+
+  /**
+   * Set client belonging
+   * @param clientId
+   * @param roomId
+   */
+  setClientBelonging = (clientId, roomId) => {
+    this.updateClient(clientId, { belongsTo: roomId });
+  }
 }
 
 module.exports = Clients;

@@ -2,7 +2,7 @@ const WS = require('ws');
 const wsA = require('./webSocketsActions');
 const Rooms = require('./Rooms');
 const Clients = require('./Players');
-const { getRoomByAbbrv } = require('./helpers');
+const { getRoomByAbbrv, getClientType } = require('./helpers');
 
 class WebSocket {
   socketServer;
@@ -31,7 +31,7 @@ class WebSocket {
    */
   onConnection = (socket) => {
     const clientId = this.clients.addClient(socket);
-    socket.send(JSON.stringify({ type: wsA.CLIENT_CONNECTED, clientId }));
+    this.sendMessage(socket, wsA.CLIENT_CONNECTED, { clientId });
 
     socket.on('message', this.onMessage(socket));
   };
@@ -43,6 +43,8 @@ class WebSocket {
   onMessage = (socket) => (message) => {
     console.log('Message: ', message);
     if (!message) return;
+
+    console.log('\n\n', this.rooms.getRooms() ,'\n\n')
 
     this.runThroughMessageHandlers(socket, message);
   }
@@ -67,7 +69,15 @@ class WebSocket {
    * @param data
    */
   reconnect = (socket, data) => {
-    this.clients.reconnectClient(data.clientId, data.newId);
+    const clients = this.clients.reconnectClient(data.clientId, data.newId);
+    const clientType = getClientType(this.rooms, this.clients, data.clientId);
+
+    if (clientType) {
+      this.sendMessage(socket, wsA.SUCCESSFULLY_RECONNECTED, {
+        clientType,
+        ...this.rooms.getRoomDataObject(data.clientId)
+      })
+    }
   };
 
   /**
@@ -80,10 +90,7 @@ class WebSocket {
     const roomId = this.rooms.addRoom(data.clientId);
     console.log('this is the rooms: ', this.rooms.getRoomsIds());
 
-    return socket.send(JSON.stringify({
-      type: wsA.ROOM_CREATION,
-      roomId: data.clientId,
-    }));
+    return this.sendMessage(socket, wsA.ROOM_CREATION, { roomId: data.clientId })
   }
 
   /**
@@ -94,16 +101,44 @@ class WebSocket {
   joinGame = (socket, data) => {
     const { roomId: roomAbbrv, clientId } = data;
     const roomId = getRoomByAbbrv(roomAbbrv, this.rooms.getRoomsIds());
+    const room = this.rooms.getRoom(roomId);
+
+    if (room.clients.includes(clientId)) return;
 
     this.rooms.addClientToRoom(roomId, clientId);
 
-    return [roomId, ...this.rooms.getRoomClients(roomId)].forEach(clientId => {
-      this.clients.getClient(clientId).socket.send(JSON.stringify({
-        type: wsA.PLAYER_JOINED,
-        players: this.rooms.getRoomClients(roomId)
-      }));
-    });
+    this.sendMessage(socket, wsA.SUCCESSFULLY_JOINED, this.rooms.getRoomDataObject(roomId));
+    return this.sendMessageToArr(
+      [roomId, ...this.rooms.getRoomClients(roomId)],
+      wsA.PLAYER_JOINED,
+      { players: this.rooms.getRoomClients(roomId) }
+    );
   }
+
+  /**
+   * Send message to client
+   * @param socket
+   * @param type
+   * @param data
+   * @returns {undefined|void}
+   */
+  sendMessage = (socket, type, data) => socket.send(JSON.stringify({
+    type,
+    ...data
+  }));
+
+  /**
+   * Sends message to array of clients
+   * @param sockets
+   * @param type
+   * @param data
+   * @returns {*}
+   */
+  sendMessageToArr = (sockets, type, data) => sockets.forEach(clientId => this.sendMessage(
+    this.clients.getClient(clientId).socket,
+    type,
+    data,
+  ));
 
   /**
    * Add new message handlers

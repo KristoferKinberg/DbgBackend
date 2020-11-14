@@ -51,6 +51,8 @@ class Rooms {
         clients: [ ...this.rooms[roomId].clients, clientId ]
       }
     };
+
+    this.clients.setClientBelonging(clientId, roomId);
   };
 
   /**
@@ -78,6 +80,17 @@ class Rooms {
    * @returns {[]|*[]}
    */
   getRoomClients = (roomId) => this.getRoom(roomId).clients;
+
+  /**
+   * Returns an object with nessessary room data for clients
+   * @param roomId
+   * @returns {{players: *[], roomId: *}}
+   */
+  getRoomDataObject = (roomId) => ({
+    roomId,
+    players: this.getRoomClients(roomId),
+  });
+
 }
 
 module.exports = Rooms;

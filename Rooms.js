@@ -1,21 +1,21 @@
 const { uuidv4 } = require('./helpers');
 
 class Rooms {
-  players = null;
+  clients = null;
   rooms = {};
 
-  constructor(players) {
-    this.players = players;
+  constructor(clients) {
+    this.clients = clients;
   }
 
   /**
    * Create room
    * @param roomId
-   * @returns {{players: [], roomId: *}}
+   * @returns {{clients: [], roomId: *}}
    */
   createRoom = (roomId) => ({
     roomId,
-    players: [],
+    clients: [],
   });
 
   /**
@@ -38,16 +38,17 @@ class Rooms {
   };
 
   /**
-   * Add player to room
+   * Add client to room
    * @param roomId
-   * @param playerId
+   * @param clientId
    */
-  addPlayer = (roomId, playerId) => {
+  addClientToRoom = (roomId, clientId) => {
+    console.log('roomId', roomId);
     this.rooms = {
       ...this.rooms,
       [roomId]: {
         ...this.rooms[roomId],
-        players: [ ...this.rooms[roomId].players, playerId ]
+        clients: [ ...this.rooms[roomId].clients, clientId ]
       }
     };
   };
@@ -59,6 +60,12 @@ class Rooms {
   getRooms = () => this.rooms;
 
   /**
+   * Return array of room ids
+   * @returns {string[]}
+   */
+  getRoomsIds = () => Object.keys(this.rooms);
+
+  /**
    * Get specific room
    * @param roomId
    * @returns {*}
@@ -66,11 +73,11 @@ class Rooms {
   getRoom = roomId => this.rooms[roomId];
 
   /**
-   * Get players
+   * Get clients in room
    * @param roomId
    * @returns {[]|*[]}
    */
-  getPlayers = (roomId) => this.getRoom(roomId).players;
+  getRoomClients = (roomId) => this.getRoom(roomId).clients;
 }
 
 module.exports = Rooms;

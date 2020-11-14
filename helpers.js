@@ -5,6 +5,14 @@ const uuidv4 = () => {
   });
 }
 
+const parseRoomAbbrv = (roomAbbrv) => roomAbbrv
+  .split('-')
+  .reduce((acc, curr) => acc + curr.charAt(0), '');
+
+const getRoomByAbbrv = (roomAbbrv, rooms) => rooms.find((room) => parseRoomAbbrv(room) === roomAbbrv)
+
 module.exports = {
-  uuidv4
+  uuidv4,
+  parseRoomAbbrv,
+  getRoomByAbbrv
 }

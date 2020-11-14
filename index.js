@@ -2,43 +2,51 @@ const WebSocket = require('ws');
 const Rooms = require('./Rooms');
 const Clients = require('./Players');
 const wsA = require('./webSocketsActions');
+const { getRoomByAbbrv } = require('./helpers');
 
 const wss = new WebSocket.Server({ port: 8080 });
 const clients = new Clients();
 const rooms = new Rooms(clients);
 
 wss.on('connection', function connection(ws) {
-  const clientId = clients.addPlayer(ws);
-  ws.send(JSON.stringify({ type: wsA.PLAYER_CONNECTED, clientId }));
+  const clientId = clients.addClient(ws);
+  ws.send(JSON.stringify({ type: wsA.CLIENT_CONNECTED, clientId }));
 
   ws.on('message', function incoming(message) {
-    console.log('received: %s', JSON.parse(message));
-    const { type, rest, clientId } = JSON.parse(message);
+    if (!message) return;
+
+    const { type, ...rest } = JSON.parse(message);
+
+    if (type === wsA.RECONNECT) {
+      const clientsObj = clients.reconnectClient(rest.clientId, rest.newId);
+    }
 
     if (type === wsA.CREATE_SERVER) {
-      const roomId = rooms.addRoom(clientId);
+      const roomId = rooms.addRoom(rest.clientId);
 
-      console.log(rooms.getRooms());
+      console.log('this is the rooms: ', rooms.getRoomsIds());
 
-      ws.send(JSON.stringify({
+      return ws.send(JSON.stringify({
         type: wsA.ROOM_CREATION,
-        roomId,
+        roomId: rest.clientId,
       }));
     }
 
-    if (type === wsA.JOIN_SERVER) {
-      const { roomId, userId } = rest;
+    if (type === wsA.JOIN_GAME) {
+      const { roomId: roomAbbrv, clientId } = rest;
+      const roomId = getRoomByAbbrv(roomAbbrv, rooms.getRoomsIds());
 
-      rooms.addPlayer(roomId, userId );
+      rooms.addClientToRoom(roomId, clientId);
+      console.log()
 
-      ws.send(JSON.stringify({
-        type: wsA.PLAYER_JOINED,
-        players: rooms.getPlayers(roomId)
-      }));
+      return [roomId, ...rooms.getRoomClients(roomId)].forEach(clientId => {
+        clients.getClient(clientId).socket.send(JSON.stringify({
+          type: wsA.PLAYER_JOINED,
+          players: rooms.getRoomClients(roomId)
+        }));
+      });
     }
   });
-
-  ws.send(JSON.stringify({ type: wsA.INIT }));
 });
 
 console.log('Is ready :D ');

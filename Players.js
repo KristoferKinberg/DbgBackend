@@ -4,11 +4,11 @@ class Clients {
   clients = {};
 
   /**
-   * Add player to server
+   * Add client to server
    * @param socket
    */
-  addPlayer = socket => {
-    const clientId = `cid_${uuidv4()}`;
+  addClient = socket => {
+    const clientId = `cid-${uuidv4()}`;
     this.clients = {
       ...this.clients,
       [clientId]: {
@@ -21,18 +21,39 @@ class Clients {
   };
 
   /**
-   * Get a specific player
+   * Get a specific client
    * @param clientId
    * @returns {*}
    */
-  getPlayer = clientId => this.clients[clientId];
+  getClient = clientId => this.clients[clientId];
 
   /**
-   * Get several players by id
+   * Returns all clients
+   * @returns {{}}
+   */
+  getClients = () => this.clients;
+
+  /**
+   * Get several clients by id
    * @param clientIds
    * @returns {Uint8Array | BigInt64Array | *[] | Float64Array | Int8Array | Float32Array | Int32Array | Uint32Array | Uint8ClampedArray | BigUint64Array | Int16Array | Uint16Array}
    */
-  getPlayersByIds = clientIds => clientIds.map(clientId => this.clients[clientId]);
+  getClientsByIds = clientIds => clientIds.map(clientId => this.clients[clientId]);
+
+  /**
+   * Reconnect client
+   * @param oldClientId
+   * @param newId
+   */
+  reconnectClient = (oldClientId, newId) => {
+    const {
+      [newId]: client,
+      [oldClientId]: oldConnection,
+      ...clients
+    } = this.clients;
+
+    return this.clients = { ...clients, [oldClientId]: { ...client, id: oldClientId}};
+  };
 }
 
 module.exports = Clients;

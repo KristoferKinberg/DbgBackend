@@ -32,6 +32,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -48,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605117933838</updated>
       <workItem from="1605117935033" duration="2269000" />
-      <workItem from="1605175953761" duration="23396000" />
+      <workItem from="1605175953761" duration="36033000" />
     </task>
     <servers />
   </component>
@@ -76,14 +77,14 @@
       <screen x="0" y="23" width="1680" height="947" />
     </state>
     <state x="536" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.947@0.23.1680.947" timestamp="1605215421582" />
-    <state x="540" y="251" width="600" height="490" key="find.popup" timestamp="1605206603084">
+    <state x="540" y="251" width="600" height="490" key="find.popup" timestamp="1605280553025">
       <screen x="0" y="23" width="1680" height="947" />
     </state>
-    <state x="540" y="251" width="600" height="490" key="find.popup/0.23.1680.947@0.23.1680.947" timestamp="1605206603084" />
-    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1605263436059">
+    <state x="540" y="251" width="600" height="490" key="find.popup/0.23.1680.947@0.23.1680.947" timestamp="1605280553025" />
+    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1605351976785">
       <screen x="0" y="23" width="1680" height="947" />
     </state>
     <state x="503" y="228" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1605201553504" />
-    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup/0.23.1680.947@0.23.1680.947" timestamp="1605263436059" />
+    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup/0.23.1680.947@0.23.1680.947" timestamp="1605351976785" />
   </component>
 </project>

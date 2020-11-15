@@ -13,7 +13,7 @@ class Clients {
       ...this.clients,
       [clientId]: {
         id: clientId,
-        belongsTo: '',
+        belongsTo: null,
         socket,
       }
     }
@@ -48,12 +48,19 @@ class Clients {
    */
   reconnectClient = (oldClientId, newId) => {
     const {
-      [newId]: client,
-      [oldClientId]: oldConnection,
+      [newId]: { id, socket, ...newClientData },
+      [oldClientId]: oldClientData = {},
       ...clients
     } = this.clients;
 
-    return this.clients = { ...clients, [oldClientId]: { ...client, id: oldClientId}};
+    return this.clients = {
+      ...clients,
+      [oldClientId]: {
+        ...newClientData,
+        ...oldClientData,
+        socket,
+      }
+    };
   };
 
   /**
@@ -69,6 +76,8 @@ class Clients {
         ...data
       }
     }
+
+    console.log('\n\n this.clients', this.clients, '\n\n');
   }
 
   /**

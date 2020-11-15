@@ -2,6 +2,7 @@ const WS = require('ws');
 const wsA = require('./webSocketsActions');
 const Rooms = require('./Rooms');
 const Clients = require('./Players');
+const {HOST} = require("./constants");
 const { getRoomByAbbrv, getClientType } = require('./helpers');
 
 class WebSocket {
@@ -73,9 +74,13 @@ class WebSocket {
     const clientType = getClientType(this.rooms, this.clients, data.clientId);
 
     if (clientType) {
+      const roomId = clientType === HOST
+        ? data.clientId
+        : this.clients.getClient(data.clientId).belongsTo;
+
       this.sendMessage(socket, wsA.SUCCESSFULLY_RECONNECTED, {
         clientType,
-        ...this.rooms.getRoomDataObject(data.clientId)
+        ...this.rooms.getRoomDataObject(roomId)
       })
     }
   };

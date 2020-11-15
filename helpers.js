@@ -39,6 +39,7 @@ const getClientType = (rooms, clients, clientId) => {
   if (rooms.getRoom(clientId)) return constants.HOST;
   if (clients.getClient(clientId).belongsTo) return constants.PLAYER;
 
+  console.log("Couldn't determine client type");
   return false;
 };
 

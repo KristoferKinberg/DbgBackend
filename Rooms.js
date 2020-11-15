@@ -79,7 +79,10 @@ class Rooms {
    * @param roomId
    * @returns {[]|*[]}
    */
-  getRoomClients = (roomId) => this.getRoom(roomId).clients;
+  getRoomClients = (roomId) => {
+    console.log(roomId);
+    return this.getRoom(roomId).clients;
+  }
 
   /**
    * Returns an object with nessessary room data for clients

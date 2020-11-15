@@ -14,13 +14,11 @@
       <change afterPath="$PROJECT_DIR$/../avalon/src/components/button/button.component.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/initialState.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/rootReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Players.js" beforeDir="false" afterPath="$PROJECT_DIR$/Players.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rooms.js" beforeDir="false" afterPath="$PROJECT_DIR$/Rooms.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebSocket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSocketsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSocketsActions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +60,7 @@
       <updated>1605117933838</updated>
       <workItem from="1605117935033" duration="2269000" />
       <workItem from="1605175953761" duration="36095000" />
-      <workItem from="1605352512271" duration="12031000" />
+      <workItem from="1605352512271" duration="21151000" />
     </task>
     <servers />
   </component>
@@ -86,6 +84,10 @@
       <screen x="0" y="23" width="1680" height="947" />
     </state>
     <state x="561" y="212" key="#JavaScript/0.23.1680.947@0.23.1680.947" timestamp="1605181245411" />
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605403757796">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605403757796" />
     <state x="536" y="305" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605215421582">
       <screen x="0" y="23" width="1680" height="947" />
     </state>

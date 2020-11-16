@@ -79,10 +79,23 @@ class Rooms {
    * @param roomId
    * @returns {[]|*[]}
    */
-  getRoomClients = (roomId) => {
-    console.log(roomId);
-    return this.getRoom(roomId).clients;
-  }
+  getRoomClients = (roomId) => this.getRoom(roomId).clients;
+
+  /**
+   * Remove a client from a room
+   * @param roomId
+   * @param clientId
+   */
+  removeClientFromRoom = (roomId, clientId) => {
+    console.log(this.rooms, roomId);
+    this.rooms = {
+      ...this.rooms,
+      [roomId]: {
+        ...this.getRoom(roomId),
+        clients: this.getRoom(roomId).clients.filter((roomClientId) => roomClientId !== clientId),
+      }
+    }
+  };
 
   /**
    * Returns an object with nessessary room data for clients

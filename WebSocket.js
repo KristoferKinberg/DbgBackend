@@ -19,6 +19,7 @@ class WebSocket {
       [wsA.RECONNECT]: this.reconnect,
       [wsA.CREATE_SERVER]: this.createServer,
       [wsA.JOIN_GAME]: this.joinGame,
+      [wsA.LEAVE_GAME]: this.leaveGame,
     });
 
     console.log('Initiating socket server..');
@@ -95,7 +96,7 @@ class WebSocket {
     const roomId = this.rooms.addRoom(data.clientId);
     console.log('this is the rooms: ', this.rooms.getRoomsIds());
 
-    return this.sendMessage(socket, wsA.ROOM_CREATION, { roomId: data.clientId })
+    return this.sendMessage(socket, wsA.ROOM_CREATION, this.rooms.getRoomDataObject(roomId))
   }
 
   /**
@@ -113,12 +114,36 @@ class WebSocket {
     this.rooms.addClientToRoom(roomId, clientId);
 
     this.sendMessage(socket, wsA.SUCCESSFULLY_JOINED, this.rooms.getRoomDataObject(roomId));
+
     return this.sendMessageToArr(
       [roomId, ...this.rooms.getRoomClients(roomId)],
       wsA.PLAYER_JOINED,
       { players: this.rooms.getRoomClients(roomId) }
     );
-  }
+  };
+
+  /**
+   * Leave game
+   * @param socket
+   * @param data
+   * @returns {*}
+   */
+  leaveGame = (socket, data) => {
+    const { roomId, clientId } = data;
+    console.log('data: ', data, 'END OF DATA');
+    //const roomId = getRoomByAbbrv(roomAbbrv, this.rooms.getRoomsIds());
+
+    this.rooms.removeClientFromRoom(roomId, clientId);
+    this.clients.updateClient(clientId, { belongsTo: '' });
+
+    this.sendMessage(socket, wsA.SUCCESSFULLY_LEFT_GAME, {});
+
+    return this.sendMessageToArr(
+      [roomId, ...this.rooms.getRoomClients(roomId)],
+      wsA.PLAYER_LEFT,
+      { players: this.rooms.getRoomClients(roomId) },
+    )
+  };
 
   /**
    * Send message to client
@@ -127,7 +152,7 @@ class WebSocket {
    * @param data
    * @returns {undefined|void}
    */
-  sendMessage = (socket, type, data) => socket.send(JSON.stringify({
+  sendMessage = (socket, type, data = {}) => socket.send(JSON.stringify({
     type,
     ...data
   }));

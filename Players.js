@@ -66,14 +66,14 @@ class Clients {
   /**
    * Update client
    * @param clientId
-   * @param data
+   * @param newData
    */
-  updateClient = (clientId, data) => {
+  updateClient = (clientId, newData) => {
     this.clients = {
       ...this.clients,
       [clientId]: {
         ...this.getClient(clientId),
-        ...data
+        ...newData
       }
     }
 

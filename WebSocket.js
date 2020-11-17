@@ -1,7 +1,7 @@
 const WS = require('ws');
 const wsA = require('./webSocketsActions');
 const Rooms = require('./Rooms');
-const Clients = require('./Players');
+const Clients = require('./Clients');
 const {HOST} = require("./constants");
 const { getRoomByAbbrv, getClientType } = require('./helpers');
 

@@ -20,6 +20,7 @@ class WebSocket {
       [wsA.CREATE_SERVER]: this.createServer,
       [wsA.JOIN_GAME]: this.joinGame,
       [wsA.LEAVE_GAME]: this.leaveGame,
+      [wsA.START_GAME]: this.startGame,
     });
 
     console.log('Initiating socket server..');
@@ -144,6 +145,19 @@ class WebSocket {
       { players: this.rooms.getRoomClients(roomId) },
     )
   };
+
+  /**
+   * Start a game
+   */
+  startGame = (socket, data) => {
+    const { roomId, clientId, game } = data;
+
+    return this.sendMessageToArr(
+      [roomId, ...this.rooms.getRoomClients(roomId)],
+      wsA.STARTED_GAME,
+      { game }
+    )
+  }
 
   /**
    * Send message to client

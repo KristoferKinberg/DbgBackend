@@ -72,6 +72,7 @@ class WebSocket {
    * @param data
    */
   reconnect = (socket, data) => {
+    console.log('data: ', data);
     const clients = this.clients.reconnectClient(data.clientId, data.newId);
     const clientType = getClientType(this.rooms, this.clients, data.clientId);
 
@@ -95,24 +96,25 @@ class WebSocket {
    */
   createServer = (socket, data) => {
     const roomId = this.rooms.addRoom(data.clientId);
-    console.log('this is the rooms: ', this.rooms.getRoomsIds());
 
     return this.sendMessage(socket, wsA.ROOM_CREATION, this.rooms.getRoomDataObject(roomId))
   }
 
   /**
-   * On join game
+   * On join games
    * @param socket
    * @param data
    */
   joinGame = (socket, data) => {
     const { roomId: roomAbbrv, clientId } = data;
     const roomId = getRoomByAbbrv(roomAbbrv, this.rooms.getRoomsIds());
+
     const room = this.rooms.getRoom(roomId);
 
-    if (room.clients.includes(clientId)) return;
+    if (room && clientId in room.clients) return; // TODO: THIS IS WHERE RECONNECT LOGIC SHOULD BE PROBABLY
 
-    this.rooms.addClientToRoom(roomId, clientId);
+    console.log('this.clients', clientId, this.clients);
+    this.rooms.addClientToRoom(roomId, this.clients.getClient(clientId));
 
     this.sendMessage(socket, wsA.SUCCESSFULLY_JOINED, this.rooms.getRoomDataObject(roomId));
 
@@ -124,18 +126,17 @@ class WebSocket {
   };
 
   /**
-   * Leave game
+   * Leave games
    * @param socket
    * @param data
    * @returns {*}
    */
   leaveGame = (socket, data) => {
     const { roomId, clientId } = data;
-    console.log('data: ', data, 'END OF DATA');
     //const roomId = getRoomByAbbrv(roomAbbrv, this.rooms.getRoomsIds());
 
     this.rooms.removeClientFromRoom(roomId, clientId);
-    this.clients.updateClient(clientId, { belongsTo: '' });
+    this.clients[clientId].leaveGame()
 
     this.sendMessage(socket, wsA.SUCCESSFULLY_LEFT_GAME, {});
 
@@ -147,10 +148,12 @@ class WebSocket {
   };
 
   /**
-   * Start a game
+   * Start a games
    */
   startGame = (socket, data) => {
     const { roomId, clientId, game } = data;
+
+    this.rooms.setRoomGame(roomId, game);
 
     return this.sendMessageToArr(
       [roomId, ...this.rooms.getRoomClients(roomId)],

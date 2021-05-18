@@ -1,6 +1,9 @@
 const { uuidv4 } = require('./helpers');
+const games = require('./games/');
+const Room = require('./Room');
 
 class Rooms {
+  game = null;
   clients = null;
   rooms = {};
 
@@ -13,10 +16,7 @@ class Rooms {
    * @param roomId
    * @returns {{clients: [], roomId: *}}
    */
-  createRoom = (roomId) => ({
-    roomId,
-    clients: [],
-  });
+  createRoom = (roomId) => new Room(roomId);
 
   /**
    * Add room
@@ -27,6 +27,17 @@ class Rooms {
     this.rooms = { ...this.rooms, [roomId]: this.createRoom(roomId) }
     return roomId;
   };
+
+  /**
+   * Set games object to room
+   * @param roomId
+   * @param game
+   */
+  setRoomGame = (roomId, game) => {
+    const Game = games[game];
+
+    //this.updateRoom(roomId, 'game', new Game());
+  }
 
   /**
    * Delete room
@@ -40,19 +51,13 @@ class Rooms {
   /**
    * Add client to room
    * @param roomId
-   * @param clientId
+   * @param client
    */
-  addClientToRoom = (roomId, clientId) => {
-    console.log('roomId', roomId);
-    this.rooms = {
-      ...this.rooms,
-      [roomId]: {
-        ...this.rooms[roomId],
-        clients: [ ...this.rooms[roomId].clients, clientId ]
-      }
-    };
+  addClientToRoom = (roomId, client) => {
+    this.rooms[roomId].addClient(client);
+    //this.updateRoom(roomId, 'clients', [ ...this.rooms[roomId].clients, clientId ])
 
-    this.clients.setClientBelonging(clientId, roomId);
+    this.clients.setClientBelonging(client.id, roomId);
   };
 
   /**
@@ -79,7 +84,9 @@ class Rooms {
    * @param roomId
    * @returns {[]|*[]}
    */
-  getRoomClients = (roomId) => this.getRoom(roomId).clients;
+  getRoomClients = (roomId) => {
+    return this.getRoom(roomId).clients;
+  }
 
   /**
    * Remove a client from a room
@@ -87,14 +94,7 @@ class Rooms {
    * @param clientId
    */
   removeClientFromRoom = (roomId, clientId) => {
-    console.log(this.rooms, roomId);
-    this.rooms = {
-      ...this.rooms,
-      [roomId]: {
-        ...this.getRoom(roomId),
-        clients: this.getRoom(roomId).clients.filter((roomClientId) => roomClientId !== clientId),
-      }
-    }
+    this.rooms[roomId].removeClient(clientId);
   };
 
   /**

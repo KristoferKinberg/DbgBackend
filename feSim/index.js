@@ -1,44 +1,41 @@
 const WebSocket = require('ws');
 const wsA = require('../webSocketsActions');
 const WebSocketClient = require('./TestSocket');
+const {HOST, PLAYER} = require("../constants");
 
-const players = [...'a'.repeat(5)].reduce((acc, curr, index) => {
+const playersJoin = () => [...'a'.repeat(1)].reduce((acc, curr, index) => {
   return {
     ...acc,
-    [`PLAYER_${index}`]: new WebSocketClient('PLAYER', index),
+    [`PLAYER_${index}`]: new WebSocketClient(PLAYER, index),
   }
 }, {})
 
 const connections = {
-  HOST: new WebSocketClient('HOST', 0),
-  PLAYERS: players,
+  HOST: null,
+  PLAYERS: null,
 }
 
-/**
- * Waits 300 ms to run func
- * @param func
- * @returns {number}
- */
-const timeOutWrap = (func) => setTimeout(func, 300);
+const createConnection = type => new WebSocketClient(type);
+
+const connectHost = () => {
+  connections.HOST = createConnection(HOST);
+}
+
 
 /**
  * Runs a host function
  * @param funcKey
  * @returns {number}
  */
-const runHost = (funcKey) => timeOutWrap(
-  () => connections.HOST[funcKey]()
-);
+const runHost = (funcKey) => connections.HOST[funcKey]()
 
 /**
  * Run a client function for all clients
  * @param funcKey
  * @returns {number}
  */
-const runClients = (funcKey) => timeOutWrap(
-  () => Object.keys(connections.PLAYERS)
-    .forEach(playerKey => connections.PLAYERS[playerKey][funcKey]())
-);
+const runClients = (funcKey) => Object.keys(connections.PLAYERS)
+    .forEach(playerKey => connections.PLAYERS[playerKey][funcKey]());
 
 /**
  * Run a client function
@@ -46,10 +43,35 @@ const runClients = (funcKey) => timeOutWrap(
  * @param playerIndex
  * @returns {number}
  */
-const runClient = (funcKey, playerIndex) => timeOutWrap(
-  () => connections.PLAYERS[`PLAYER_${playerIndex}`][funcKey]()
-);
+const runClient = (funcKey, playerIndex) => connections.PLAYERS[`PLAYER_${playerIndex}`][funcKey]();
 
-runHost('createServer');
-runClients('joinGame');
-runHost('startGame');
+
+
+
+
+
+
+
+
+
+const funcs = [
+  [connectHost],
+  //[runHost, 'createServer'],
+  //[() => connections.PLAYERS = playersJoin()],
+  //[runClients, 'joinGame'],
+  //[runHost, 'startGame']
+];
+
+const duration = 200;
+
+const sleep = async (index, func, ...args) => new Promise(resolve => setTimeout(() => {
+    console.log(`waiting ${duration}`);
+    resolve(func(...args));
+  }, duration*index+1)
+)
+
+const abc123 = () => funcs.forEach(async ([func, ...args], index) =>
+  await sleep(index, func, ...args));
+
+sleep(10, abc123, '')
+

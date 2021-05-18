@@ -14,16 +14,127 @@
       <change afterPath="$PROJECT_DIR$/../avalon/src/components/button/button.component.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/initialState.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/rootReducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../order-capture-web/src/OrderCapture/scenes/Delivery/components/DeliveryCalendar/deliveryCalendar.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web-schema/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web-schema/src/main/java/se/ne/scala/graphql/types/GraphQLScalarTypeLong.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web-schema/src/main/resources/scala.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/.maven-dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/entrypoint.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/ApplicationMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/ExaminationClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/FormidaClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/LearnosityWebClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/ParticipantClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/TestClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/ToolClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/client/UserGroupClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/CachingConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/ClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/FilterConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/LearnosityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/MvcConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/CustomErrorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/IndexController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/LearnosityAuthorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/LearnosityItemsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/LearnosityReportsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/controller/StandardGraphQLController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/conversion/DtoGraphQLConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/conversion/SortOrderConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/CoreContentDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/CourseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/KnowledgeRequirementDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/LearnosityActivityDataDataConfigDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/LearnosityActivityDataDataDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/LearnosityActivityDataDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/LearnosityActivityDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/SchoolTypeDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/dto/SettingsDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/CustomGraphQLInvocation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/DataFetchersDelegateMutationTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/DataFetchersDelegateQueryTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/ExaminationWebGraphQLContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateCourseImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateExaminationPropertyTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateExaminationResourceTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateExaminationToolTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateExaminationTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateExaminerTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateFavoriteTestTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateGroupTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateItemImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateParticipantTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateSchoolTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateTestContainerTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateToolTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/DataFetchersDelegateUserTypeImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/fetcher/types/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityAuthorConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityAuthorRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityItemsBetaFlags.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityItemsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityItemsConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityItemsQuestionsApiInitOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityItemsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityLiveReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityLiveReportActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityLiveReportUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityReportsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnositySecurity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/LearnosityUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/model/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/repository/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/AbstractService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/ExaminationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/FormidaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/SchoolUnitService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/TestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/ToolService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/service/UserGroupService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/utils/ScalaUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/java/se/ne/scala/utils/SettingsUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/application-int.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/application-local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/resources/public.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/main/webapp/WEB-INF/jsp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/test/java/se/ne/scala/ApplicationMainTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/test/java/se/ne/scala/conversion/SortOrderConverterTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/test/java/se/ne/scala/fetcher/ExaminationWebGraphQLContextTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/test/resources/application-test.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examination-web/src/test/resources/logback-test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Players.js" beforeDir="false" afterPath="$PROJECT_DIR$/Players.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/Clients.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rooms.js" beforeDir="false" afterPath="$PROJECT_DIR$/Rooms.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebSocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webSocketsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/webSocketsActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feSim/TestSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/TestSocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feSim/clientExtension.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/clientExtension.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feSim/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/characters.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/characters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/teamGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/teamGenerator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,6 +149,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -46,7 +158,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/game/avalon" />
+      <recent name="$PROJECT_DIR$/feSim" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -61,6 +178,9 @@
       <workItem from="1605117935033" duration="2269000" />
       <workItem from="1605175953761" duration="36095000" />
       <workItem from="1605352512271" duration="29115000" />
+      <workItem from="1606141735934" duration="4000" />
+      <workItem from="1606301868691" duration="25177000" />
+      <workItem from="1621200232589" duration="24983000" />
     </task>
     <servers />
   </component>
@@ -80,27 +200,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="561" y="212" key="#JavaScript" timestamp="1605181245411">
-      <screen x="0" y="23" width="1680" height="947" />
-    </state>
-    <state x="561" y="212" key="#JavaScript/0.23.1680.947@0.23.1680.947" timestamp="1605181245411" />
-    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605403757796">
+    <state x="540" y="251" width="599" height="548" key="find.popup" timestamp="1621360082717">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1605403757796" />
-    <state x="536" y="305" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605215421582">
-      <screen x="0" y="23" width="1680" height="947" />
-    </state>
-    <state x="536" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1680.947@0.23.1680.947" timestamp="1605215421582" />
-    <state x="540" y="253" width="600" height="544" key="find.popup" timestamp="1605525790608">
+    <state x="540" y="251" width="599" height="548" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621360082717" />
+    <state x="540" y="251" width="599" height="548" key="find.popup/0.25.1680.940@0.25.1680.940" timestamp="1621322263499" />
+    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1621327730386">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="540" y="253" width="600" height="544" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1605525790608" />
-    <state x="540" y="251" width="600" height="490" key="find.popup/0.23.1680.947@0.23.1680.947" timestamp="1605280553025" />
-    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1605363330388">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1605363330388" />
-    <state x="503" y="228" width="672" height="678" key="search.everywhere.popup/0.23.1680.947@0.23.1680.947" timestamp="1605351976785" />
+    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621327730386" />
   </component>
 </project>

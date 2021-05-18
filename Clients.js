@@ -1,4 +1,5 @@
 const { uuidv4 } = require('./helpers');
+const Client = require('./Client');
 
 class Clients {
   clients = {};
@@ -8,17 +9,13 @@ class Clients {
    * @param socket
    */
   addClient = socket => {
-    const clientId = `cid-${uuidv4()}`;
+    const id = uuidv4();
     this.clients = {
       ...this.clients,
-      [clientId]: {
-        id: clientId,
-        belongsTo: null,
-        socket,
-      }
-    }
+      [id]: new Client(id, socket),
+    };
 
-    return clientId;
+    return id;
   };
 
   /**
@@ -48,45 +45,24 @@ class Clients {
    */
   reconnectClient = (oldClientId, newId) => {
     const {
-      [newId]: { id, socket, ...newClientData },
-      [oldClientId]: oldClientData = {},
+      [newId]: newClient,
+      [oldClientId]: oldClient,
       ...clients
     } = this.clients;
 
     return this.clients = {
       ...clients,
-      [oldClientId]: {
-        ...newClientData,
-        ...oldClientData,
-        socket,
-      }
+      [oldClientId]: oldClient.updateSocket(newClient.socket)
     };
   };
 
   /**
-   * Update client
-   * @param clientId
-   * @param newData
-   */
-  updateClient = (clientId, newData) => {
-    this.clients = {
-      ...this.clients,
-      [clientId]: {
-        ...this.getClient(clientId),
-        ...newData
-      }
-    }
-
-    console.log('\n\n this.clients', this.clients, '\n\n');
-  }
-
-  /**
    * Set client belonging
    * @param clientId
-   * @param roomId
+   * @param room
    */
-  setClientBelonging = (clientId, roomId) => {
-    this.updateClient(clientId, { belongsTo: roomId });
+  setClientBelonging = (clientId, room) => {
+    this.clients[clientId].belongsTo = room;
   }
 }
 

@@ -117,10 +117,11 @@
       <change beforePath="$PROJECT_DIR$/../examination-web/src/test/resources/logback-test.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/games/avalon/characters.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/characters.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/avalon/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/avalon/teamGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/teamGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ws/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/ws/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +179,7 @@
       <workItem from="1605352512271" duration="29115000" />
       <workItem from="1606141735934" duration="4000" />
       <workItem from="1606301868691" duration="25177000" />
-      <workItem from="1621200232589" duration="47793000" />
+      <workItem from="1621200232589" duration="53197000" />
     </task>
     <servers />
   </component>

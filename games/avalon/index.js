@@ -1,24 +1,9 @@
-const teamsGenerator = require('./teamGenerator');
-
-const getPlayerObject = (client, players, character) => ({
-  ...players,
-  [client.id]: {
-    client,
-    character,
-  }
-});
-
-const assign = ([client, ...clients], players, characters) => {
-  const randomNumber = Math.floor(Math.random() * characters.length);
-  const remainingCharacters = [...characters];
-  const [ character ] = remainingCharacters.splice(randomNumber, 1);
-
-  if (!clients.length) return getPlayerObject(client, players, character);
-
-  return assign(clients, getPlayerObject(client, players, character), remainingCharacters)
-}
+const {teamsGenerator, assignCharacter} = require('./teamGenerator');
 
 class Avalon {
+  king = null;
+  kingRound = 0;
+  round = 0;
   clients;
   players;
   room;
@@ -29,13 +14,27 @@ class Avalon {
 
     this.clients = clients;
     this.players = this.assignCharacters();
-    console.log(this.players);
+    this.startRound();
   }
+
+  getPlayersAsArray = () => Object.values(this.players);
 
   assignCharacters = (clients) => {
     const teams = teamsGenerator(Object.keys(this.clients));
-    return assign(Object.values(this.clients), {}, teams);
+
+    return assignCharacter(Object.values(this.clients), {}, teams);
   }
+
+  startRound = () => {
+    this.assignKing();
+    this.round = this.round++;
+  }
+
+  assignKing = () => {
+    this.king = this.getPlayersAsArray()
+      .find(({ playerIndex }) => playerIndex === this.kingRound);
+    this.kingRound++;
+  };
 }
 
 module.exports = Avalon;

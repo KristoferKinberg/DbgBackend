@@ -79,8 +79,14 @@ const teamDivider = {
   }
 };
 
+const teams = {
+  [GOOD]: GOOD,
+  [EVIL]: EVIL
+}
+
 module.exports = {
   charNames,
   characters,
-  teamDivider
+  teamDivider,
+  teams
 }

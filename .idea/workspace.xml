@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -115,16 +118,9 @@
       <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rooms.js" beforeDir="false" afterPath="$PROJECT_DIR$/Rooms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebSocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feSim/TestSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/TestSocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feSim/clientExtension.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/clientExtension.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feSim/clientIds.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/clientIds.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feSim/hostExtension.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/hostExtension.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feSim/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/avalon/characters.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/characters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/avalon/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/avalon/teamGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/teamGenerator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +178,7 @@
       <workItem from="1605352512271" duration="29115000" />
       <workItem from="1606141735934" duration="4000" />
       <workItem from="1606301868691" duration="25177000" />
-      <workItem from="1621200232589" duration="43070000" />
+      <workItem from="1621200232589" duration="47793000" />
     </task>
     <servers />
   </component>
@@ -207,9 +203,9 @@
     </state>
     <state x="540" y="251" width="599" height="548" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621535274166" />
     <state x="540" y="251" width="599" height="548" key="find.popup/0.25.1680.940@0.25.1680.940" timestamp="1621322263499" />
-    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1621536190825">
+    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1621537016091">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621536190825" />
+    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621537016091" />
   </component>
 </project>

@@ -1,14 +1,12 @@
-const { characters, charNames, teamDivider } = require('./characters');
+const { characters, charNames, teamDivider, teams } = require('./characters');
 
-const TeamsGenerator = (players, selectedGood = [], selectedEvil = []) => {
-  const teamDivide = teamDivider[players.length];
+const teamsGenerator = (numberOfPlayers, selectedGood = [], selectedEvil = []) => {
+  const teamDivide = teamDivider[Object.keys(numberOfPlayers).length];
   const goodT = characters[teams.GOOD];
   const badT = characters[teams.EVIL];
 
   const lackingGood = teamDivide[teams.GOOD] - (1 + selectedGood.length);
   const lackingEvil = teamDivide[teams.EVIL] - (1 + selectedEvil.length);
-
-  console.log(lackingGood, lackingEvil);
 
   const getFillOuts = (shortage, team) => 'a'
     .repeat(shortage)
@@ -25,4 +23,4 @@ const TeamsGenerator = (players, selectedGood = [], selectedEvil = []) => {
   ];
 };
 
-export default TeamsGenerator;
+module.exports = teamsGenerator;

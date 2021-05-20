@@ -1,28 +1,18 @@
 const WebSocket = require('ws');
 const wsA = require('../webSocketsActions');
-const hostExtension = require('./hostExtension');
-const clientExtension = require('./clientExtension');
+const { hostExtension } = require('./hostExtension');
+const { clientExtension } = require('./clientExtension');
 const clientIds = require('./clientIds');
-
-function* idGenerator(){
-  let i = 0;
-
-  while (true){
-    yield i++;
-  }
-}
-
-const getId = idGenerator();
+const term = require( 'terminal-kit' ).terminal ;
 
 class WebSocketClient {
+  logTestSocketMessages = false;
   socketConnection;
   messageHandlers;
   clientId;
 
   constructor(type, clientIdIndex) {
     this.socketConnection = new WebSocket('ws://localhost:8080');
-    //this.clientId = `cid-${clientIds[clientIdIndex]}`;
-    this.clientId = clientIds[getId.next().value];
 
     const functionalityExtension = type === 'HOST'
       ? hostExtension(this.sendMessage)
@@ -34,9 +24,9 @@ class WebSocketClient {
     Object.keys(functionalityExtension)
       .forEach(handlerName => this[handlerName] = functionalityExtension[handlerName]);
 
-    //this.addMessageHandlers({
-      //[wsA.CLIENT_CONNECTED]: this.join, // TODO: THIS HAPPENS AFTER CONNECTING, SO THIS SHOULD BE ATTEMPTS TO CONNECT TO A SERVER
-    //});
+    this.addMessageHandlers({
+      [wsA.CLIENT_CONNECTED]: this.onConnect,
+    });
   }
 
   /**
@@ -52,6 +42,7 @@ class WebSocketClient {
    * @param message
    */
   onConnection = (message) => {
+    console.log(message);
     //console.log('open', message);
   };
 
@@ -60,24 +51,29 @@ class WebSocketClient {
    * @param message
    */
   onMessage = (message) => {
-    console.log('Message: ', message, '\n\n');
+    if (this.logTestSocketMessages) term.magenta(`Message: ${message}\n`)
     if (!message) return;
 
     this.runThroughMessageHandlers(message);
   }
 
   /**
+   * When the client connects it assigns it's id
+   * @param clientId
+   * @returns {*}
+   */
+  onConnect = ({ clientId }) => this.clientId = clientId;
+
+  /**
    * Runs through the message handlers
-   * @param socket
    * @param message
    */
   runThroughMessageHandlers = (message) => {
     const { type, ...data } = JSON.parse(message);
 
-    if (this.messageHandlers[type]){
-      console.log(type);
-      this.messageHandlers[type](data)
-    }
+    if (!this.messageHandlers[type] && this.logTestSocketMessages)
+      term.bold.yellow(`Unknown message type: ${type}`);
+    if (this.messageHandlers[type]) this.messageHandlers[type](data)
   };
 
   /**
@@ -87,7 +83,6 @@ class WebSocketClient {
   sendMessage = (msg) => {
     const message = JSON.stringify({ ...msg, clientId: this.clientId });
     console.log('Message: ', message);
-    // console.log(this.socketConnection);
     this.socketConnection.send(message);
   };
 

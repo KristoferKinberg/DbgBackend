@@ -4,18 +4,28 @@ class Room {
   id;
   game;
   clients;
+  owningClient;
 
-  constructor(id) {
+  constructor(id, client) {
     this.id = id;
     this.clients = [];
+    this.owningClient = client;
   }
 
-  set clients (client){
+  set clients(client) {
     this.clients = client;
   }
 
-  get clients (){
+  get clients() {
     return this.clients;
+  }
+
+  get clientIds() {
+    return Object.keys(this.clients);
+  }
+
+  get owner (){
+    return this.owningClient;
   }
 
   addClient = (client) => {

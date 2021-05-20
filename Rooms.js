@@ -1,10 +1,13 @@
 const { uuidv4 } = require('./helpers');
 const games = require('./games/');
 const Room = require('./Room');
+const {getNextId} = require("./feSim/clientIds");
+const term = require( 'terminal-kit' ).terminal ;
 
 class Rooms {
   game = null;
   clients = null;
+  isDev = true;
   rooms = {};
 
   constructor(clients) {
@@ -14,17 +17,32 @@ class Rooms {
   /**
    * Create room
    * @param roomId
+   * @param client
    * @returns {{clients: [], roomId: *}}
    */
-  createRoom = (roomId) => new Room(roomId);
+  createRoom = (roomId, client) => new Room(roomId, client);
+
+  /**
+   * Returns correct room id
+   * @param roomId
+   * @returns {*|string}
+   */
+  getRoomId = (roomId) => {
+    if (this.isDev) return getNextId();
+
+    return roomId
+      ? roomId
+      : uuidv4();
+  }
 
   /**
    * Add room
+   * @param client
    * @returns {string}
    */
-  addRoom = (roomIdd) => {
-    const roomId = roomIdd ? roomIdd : uuidv4();
-    this.rooms = { ...this.rooms, [roomId]: this.createRoom(roomId) }
+  addRoom = (client) => {
+    const roomId = this.getRoomId(client.id);
+    this.rooms = { ...this.rooms, [roomId]: this.createRoom(roomId, client) }
     return roomId;
   };
 
@@ -34,9 +52,7 @@ class Rooms {
    * @param game
    */
   setRoomGame = (roomId, game) => {
-    const Game = games[game];
-
-    //this.updateRoom(roomId, 'game', new Game());
+    this.getRoom(roomId).setGame(game);
   }
 
   /**
@@ -54,6 +70,11 @@ class Rooms {
    * @param client
    */
   addClientToRoom = (roomId, client) => {
+    if (!(roomId in this.rooms)) {
+      term.bold.red(`Room not found! \n`);
+      term.red(`Room id: ${roomId}`);
+    }
+
     this.rooms[roomId].addClient(client);
     //this.updateRoom(roomId, 'clients', [ ...this.rooms[roomId].clients, clientId ])
 
@@ -85,7 +106,7 @@ class Rooms {
    * @returns {[]|*[]}
    */
   getRoomClients = (roomId) => {
-    return this.getRoom(roomId).clients;
+    return Object.values(this.getRoom(roomId).clients);
   }
 
   /**

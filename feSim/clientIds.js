@@ -51,4 +51,23 @@ const clientIds = [
   "34a3f3e2-633f-4e58-8ac4-26cfb0e2e7bc"
 ]
 
-module.exports = clientIds;
+function* idGenerator(){
+  let i = 0;
+
+  while (true){
+    yield i++;
+  }
+}
+
+const getId = idGenerator();
+
+/**
+ * Returns next index of clientIds
+ * @returns {string}
+ */
+const getNextId = () => clientIds[getId.next().value];
+
+module.exports = {
+  clientIds,
+  getNextId
+};

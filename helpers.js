@@ -24,7 +24,7 @@ const parseRoomAbbrv = (roomAbbrv) => roomAbbrv
  * Returns room from abbrevation
  * @param roomAbbrv
  * @param rooms
- * @returns {*|number|bigint}
+ * @returns {*|number}
  */
 const getRoomByAbbrv = (roomAbbrv, rooms) => rooms.find((room) => parseRoomAbbrv(room) === roomAbbrv)
 

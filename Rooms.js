@@ -2,7 +2,7 @@ const { uuidv4 } = require('./helpers');
 const games = require('./games/');
 const Room = require('./Room');
 const {getNextId} = require("./feSim/clientIds");
-const term = require( 'terminal-kit' ).terminal ;
+const term = require( 'terminal-kit' ).terminal;
 
 class Rooms {
   game = null;
@@ -10,7 +10,7 @@ class Rooms {
   isDev = true;
   rooms = {};
 
-  constructor(clients) {
+  constructor({ clients }) {
     this.clients = clients;
   }
 
@@ -20,7 +20,7 @@ class Rooms {
    * @param client
    * @returns {{clients: [], roomId: *}}
    */
-  createRoom = (roomId, client) => new Room(roomId, client);
+  createRoom = (roomId, client) => Room(roomId, client);
 
   /**
    * Returns correct room id
@@ -76,8 +76,6 @@ class Rooms {
     }
 
     this.rooms[roomId].addClient(client);
-    //this.updateRoom(roomId, 'clients', [ ...this.rooms[roomId].clients, clientId ])
-
     this.clients.setClientBelonging(client.id, roomId);
   };
 
@@ -127,7 +125,6 @@ class Rooms {
     roomId,
     players: this.getRoomClients(roomId),
   });
-
 }
 
 module.exports = Rooms;

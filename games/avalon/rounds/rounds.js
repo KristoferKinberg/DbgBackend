@@ -1,9 +1,10 @@
 const roundDetails = require('./roundDetails');
+const Round = require('./round');
 
 class Rounds {
   roundNumber = 0;
   currentRound;
-  rounds;
+  playerRounds;
   players;
   king;
   kingRound;
@@ -19,7 +20,8 @@ class Rounds {
 
   startRound = () => {
     this.roundNumber = this.roundNumber++;
-    this.kingRound = 0;
+    this.currentRound = new Round(this.players);
+    //this.kingRound = 0;
   };
 
   getPlayersAsArray = () => Object.values(this.players);

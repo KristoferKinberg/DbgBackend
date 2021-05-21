@@ -18,6 +18,9 @@
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/initialState.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../avalon/src/store/rootReducer.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../order-capture-web/src/OrderCapture/scenes/Delivery/components/DeliveryCalendar/deliveryCalendar.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Socket.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/games/avalon/rounds/round.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../examination-web-schema/pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../examination-web-schema/src/main/java/se/ne/scala/graphql/types/GraphQLScalarTypeLong.java" beforeDir="false" />
@@ -117,7 +120,11 @@
       <change beforePath="$PROJECT_DIR$/../examination-web/src/test/resources/logback-test.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/games/avalon/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Room.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rooms.js" beforeDir="false" afterPath="$PROJECT_DIR$/Rooms.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebSocket.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/avalon/rounds/rounds.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/rounds/rounds.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +150,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript&#10;GitIgnore" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -196,18 +203,24 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2339" y="947" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1621623202872">
+      <screen x="1440" y="625" width="2560" height="1415" />
+    </state>
+    <state x="2339" y="947" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1440.625.2560.1415/0.25.1440.2457@1440.625.2560.1415" timestamp="1621623202872" />
     <state x="641" y="443" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621585283878">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="641" y="443" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1680.1050@0.0.1680.1050" timestamp="1621585283878" />
-    <state x="540" y="251" width="599" height="548" key="find.popup" timestamp="1621535274166">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="2263" y="963" width="913" height="739" key="find.popup" timestamp="1621623206524">
+      <screen x="1440" y="625" width="2560" height="1415" />
     </state>
     <state x="540" y="251" width="599" height="548" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621535274166" />
     <state x="540" y="251" width="599" height="548" key="find.popup/0.25.1680.940@0.25.1680.940" timestamp="1621322263499" />
-    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1621537016091">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="2263" y="963" width="913" height="739" key="find.popup/1440.625.2560.1415/0.25.1440.2457@1440.625.2560.1415" timestamp="1621623206524" />
+    <state x="2206" y="936" width="1024" height="914" key="search.everywhere.popup" timestamp="1621627337353">
+      <screen x="1440" y="625" width="2560" height="1415" />
     </state>
-    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621537016091" />
+    <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621618549415" />
+    <state x="2206" y="936" width="1024" height="914" key="search.everywhere.popup/1440.625.2560.1415/0.25.1440.2457@1440.625.2560.1415" timestamp="1621627337353" />
   </component>
 </project>

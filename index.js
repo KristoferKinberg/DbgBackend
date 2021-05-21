@@ -1,2 +1,3 @@
-const Websocket = require('./WebSocket');
-new Websocket();
+const Main = require('./Main');
+
+Main();

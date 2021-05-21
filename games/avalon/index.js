@@ -1,4 +1,5 @@
 const {teamsGenerator, assignCharacter} = require('./teamGenerator');
+const Rounds = require('./rounds/rounds');
 
 class Avalon {
   king = null;
@@ -8,13 +9,15 @@ class Avalon {
   players;
   room;
   characters;
+  rounds;
 
   constructor(clients, room) {
     console.log('Avalon games started');
 
     this.clients = clients;
     this.players = this.assignCharacters();
-    this.startRound();
+    this.rounds = new Rounds(this.players);
+    this.startGame();
   }
 
   getPlayersAsArray = () => Object.values(this.players);
@@ -25,16 +28,9 @@ class Avalon {
     return assignCharacter(Object.values(this.clients), {}, teams);
   }
 
-  startRound = () => {
-    this.assignKing();
-    this.round = this.round++;
+  startGame = () => {
+    this.rounds.startRound();
   }
-
-  assignKing = () => {
-    this.king = this.getPlayersAsArray()
-      .find(({ playerIndex }) => playerIndex === this.kingRound);
-    this.kingRound++;
-  };
 }
 
 module.exports = Avalon;

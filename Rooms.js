@@ -20,7 +20,7 @@ class Rooms {
    * @param client
    * @returns {{clients: [], roomId: *}}
    */
-  createRoom = (roomId, client) => Room(roomId, client);
+  createRoom = (roomId, client) => Room({ id: roomId, client });
 
   /**
    * Returns correct room id
@@ -47,36 +47,12 @@ class Rooms {
   };
 
   /**
-   * Set games object to room
-   * @param roomId
-   * @param game
-   */
-  setRoomGame = (roomId, game) => {
-    this.getRoom(roomId).setGame(game);
-  }
-
-  /**
    * Delete room
    * @param roomId
    */
   deleteRoom = (roomId) => {
     const { [roomId]: toBeRemoved, ...rest } = this.rooms;
     this.rooms = rest;
-  };
-
-  /**
-   * Add client to room
-   * @param roomId
-   * @param client
-   */
-  addClientToRoom = (roomId, client) => {
-    if (!(roomId in this.rooms)) {
-      term.bold.red(`Room not found! \n`);
-      term.red(`Room id: ${roomId}`);
-    }
-
-    this.rooms[roomId].addClient(client);
-    this.clients.setClientBelonging(client.id, roomId);
   };
 
   /**
@@ -106,15 +82,6 @@ class Rooms {
   getRoomClients = (roomId) => {
     return Object.values(this.getRoom(roomId).clients);
   }
-
-  /**
-   * Remove a client from a room
-   * @param roomId
-   * @param clientId
-   */
-  removeClientFromRoom = (roomId, clientId) => {
-    this.rooms[roomId].removeClient(clientId);
-  };
 
   /**
    * Returns an object with nessessary room data for clients

@@ -1,6 +1,7 @@
 const games = require('./games/');
 const SocketWrapper = require('./Socket');
 const wsA = require('./webSocketsActions');
+const term = require( 'terminal-kit' ).terminal;
 
 class Room {
   id;
@@ -9,13 +10,26 @@ class Room {
   owningClient;
   sendMessage;
   sendMessageToArr;
+  messageHandlers;
 
-  constructor({ id, client, messageHandler: { sendMessage, sendMessageToArr }}) {
+  constructor({ id, client, messageHandler: { sendMessage, sendMessageToArr, registerRoom }}) {
+    registerRoom(id, this.messageHandler);
     this.id = id;
     this.clients = [];
     this.owningClient = client;
     this.sendMessage = sendMessage;
     this.sendMessageToArr = sendMessageToArr;
+    this.messageHandlers = {
+      [wsA.JOIN_GAME]: this.addClient,
+      [wsA.START_GAME]: this.setAndStartGame,
+      [wsA.LEAVE_GAME]: this.removeClient
+    }
+  }
+
+  messageHandler = ({ type, ...args }) => {
+    if (!type in this.messageHandlers) return term.bold.red(`Handler not found for type ${type}!`);
+
+    this.messageHandlers[type](args);
   }
 
   /**
@@ -63,13 +77,18 @@ class Room {
    * Adds a client to the room
    * @param client
    */
-  addClient = (client) => {
+  addClient = ({ client }) => {
     this.clients = {
       ...this.clients,
       [client.id]: client,
     }
 
-    this.sendMessage(client.socket, wsA.SUCCESSFULLY_JOINED, this.getRoomDataObject());
+    client.belongsTo = this.id;
+    this.sendMessage({
+      client,
+      type: wsA.SUCCESSFULLY_JOINED,
+      data: this.getRoomDataObject()
+    })
     this.sendToClients(wsA.PLAYER_JOINED, this.getRoomDataObject());
   }
 
@@ -88,19 +107,28 @@ class Room {
   /**
    * Removes a client from the room
    * @param clientId
+   * @param client
    */
-  removeClient = clientId => {
+  removeClient = ({ clientId, client }) => { // TODO: Wouldn't it be enpugh to simply supply client..?
     const { [clientId]: toBeRemoved, ...rest } = this.clients;
+
     this.clients = rest;
+    this.sendMessage({
+      client,
+      type: wsA.SUCCESSFULLY_LEFT_GAME,
+    });
+    this.sendMessageToArr({ clients: Object.values(this.clients), type: wsA.PLAYER_LEFT, players: Object.keys(this.clients) });
+
+    term.cyan(`Client ${clientId} left the game. \n\n Players left: ${Object.keys(this.clients)}`);
   }
 
   /**
    * Sets room game
    * @param game
    */
-  setGame = game => {
+  setAndStartGame = ({ game }) => {
     const Game = games[game];
-    this.game = new Game(this.clients);
+    this.game = SocketWrapper(Game, false)({ clients: this.clients });
     this.sendToClients(wsA.STARTED_GAME, { game });
   }
 }

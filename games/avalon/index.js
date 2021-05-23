@@ -1,5 +1,6 @@
 const {teamsGenerator, assignCharacter} = require('./teamGenerator');
-const Rounds = require('./rounds/rounds');
+const Round = require('./rounds/round');
+const aA = require('./avalonActions');
 
 class Avalon {
   king = null;
@@ -10,26 +11,45 @@ class Avalon {
   room;
   characters;
   rounds;
+  sendMessage;
+  sendMessageToArr;
 
-  constructor(clients, room) {
+  constructor({ clients, room, messageHandler: { sendMessage, sendMessageToArray }}) {
     console.log('Avalon games started');
 
     this.clients = clients;
-    this.players = this.assignCharacters();
-    this.rounds = new Rounds(this.players);
+
+    this.rounds = {};
+    this.sendMessage = sendMessage;
+    this.sendMessageToArr = sendMessageToArray;
+
+    this.assignCharacters();
     this.startGame();
   }
 
   getPlayersAsArray = () => Object.values(this.players);
 
-  assignCharacters = (clients) => {
+  assignCharacters = () => {
     const teams = teamsGenerator(Object.keys(this.clients));
+    this.players = assignCharacter(Object.values(this.clients), {}, teams);
 
-    return assignCharacter(Object.values(this.clients), {}, teams);
+    this.getPlayersAsArray()
+      .forEach(({ client, character }) => this.sendMessage({
+        client,
+        type: aA.ASSIGNED_CHARACTER,
+        data: character
+      }));
+  }
+
+  createNewRound = () => {
+    this.rounds = {
+      ...this.rounds,
+      [Object.keys(this.rounds)]: Round({ players: this.players }),
+    }
   }
 
   startGame = () => {
-    this.rounds.startRound();
+    this.createNewRound();
   }
 }
 

@@ -36,8 +36,13 @@ const runHost = (funcKey) => connections.HOST[funcKey]()
  * @param funcKey
  * @returns {number}
  */
-const runClients = (funcKey) => Object.keys(connections.PLAYERS)
-    .forEach(playerKey => connections.PLAYERS[playerKey][funcKey]());
+const runClients = (funcKey) => Object.values(connections.PLAYERS)
+    .forEach(player => player[funcKey]());
+
+const clientLeaveGame = (index = 0) => () => {
+  const { leaveGame, roomId } = Object.values(connections.PLAYERS)[index];
+  return leaveGame({ roomId })
+}
 
 /**
  * Run a client function
@@ -47,12 +52,20 @@ const runClients = (funcKey) => Object.keys(connections.PLAYERS)
  */
 const runClient = (funcKey, playerIndex) => connections.PLAYERS[`PLAYER_${playerIndex}`][funcKey]();
 
-const funcs = [
+const testGameRun = [
   [connectHost, 'Connecting host', ''],
   [runHost, 'Host creating server', hostExtFuncs.createServer],
   [() => connections.PLAYERS = playersConnect(), 'Connecting players', ''],
   [runClients, 'Clients joining game', clientExtFuncs.joinGame],
   [runHost, 'startGame', hostExtFuncs.startGame]
+];
+
+const testClientLeave = [
+  [connectHost, 'Connecting host', ''],
+  [runHost, 'Host creating server', hostExtFuncs.createServer],
+  [() => connections.PLAYERS = playersConnect(), 'Connecting players', ''],
+  [runClients, 'Clients joining game', clientExtFuncs.joinGame],
+  [clientLeaveGame(), 'Client left game', clientExtFuncs.leaveGame]
 ];
 
 const duration = 200;
@@ -62,7 +75,7 @@ const sleep = async (index, func, msg, ...args) => new Promise(resolve => setTim
   resolve(func(...args));
 }, duration*index+1))
 
-const abc123 = () => funcs.forEach(async ([func, ...args], index) => {
+const abc123 = () => testGameRun.forEach(async ([func, ...args], index) => {
   await sleep(index, func, ...args)
   term.brightBlue('Done!'+ '\n'.repeat(2));
 });

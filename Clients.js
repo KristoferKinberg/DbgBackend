@@ -10,12 +10,14 @@ class Clients {
    */
   addClient = socket => {
     const id = uuidv4();
+    const client = new Client(id, socket);
+
     this.clients = {
       ...this.clients,
-      [id]: new Client(id, socket),
+      [id]: client,
     };
 
-    return id;
+    return client;
   };
 
   /**
@@ -61,9 +63,9 @@ class Clients {
    * @param clientId
    * @param room
    */
-  setClientBelonging = (clientId, room) => {
+  /**setClientBelonging = (clientId, room) => {
     this.clients[clientId].belongsTo = room;
-  }
+  }*/
 }
 
 module.exports = Clients;

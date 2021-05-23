@@ -58,7 +58,7 @@ const roundDetails = {
     },
     q4: {
       playersOnAssignment: 4,
-      failsNeeded: 1,
+      failsNeeded: 2,
     },
     q5: {
       playersOnAssignment: 4,
@@ -80,7 +80,7 @@ const roundDetails = {
     },
     q4: {
       playersOnAssignment: 5,
-      failsNeeded: 1,
+      failsNeeded: 2,
     },
     q5: {
       playersOnAssignment: 5,
@@ -98,7 +98,7 @@ const roundDetails = {
     },
     q3: {
       playersOnAssignment: 4,
-      failsNeeded: 1,
+      failsNeeded: 2,
     },
     q4: {
       playersOnAssignment: 5,
@@ -124,7 +124,7 @@ const roundDetails = {
     },
     q4: {
       playersOnAssignment: 5,
-      failsNeeded: 1,
+      failsNeeded: 2,
     },
     q5: {
       playersOnAssignment: 5,

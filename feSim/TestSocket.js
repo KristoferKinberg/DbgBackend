@@ -15,8 +15,10 @@ class WebSocketClient {
   playersInRoom;
   isKing;
   character;
+  registerOnConnectionObject;
+  playersToSelect;
 
-  constructor(type, clientIdIndex) {
+  constructor(type, clientIdIndex, registerOnConnectionObject = false) {
     this.socketConnection = new WebSocket('ws://localhost:8080');
 
     const functionalityExtension = type === 'HOST'
@@ -35,6 +37,18 @@ class WebSocketClient {
       [aA.ASSIGNED_CHARACTER]: this.handleAssignedCharacter,
       [aA.ASSIGNED_KING]: this.handleAssignedKing,
     });
+
+    if (registerOnConnectionObject){
+      this.registerOnConnectionObject = registerOnConnectionObject;
+    }
+  }
+
+  _registerOnConnectionObject = () => {
+    this.registerOnConnectionObject(this);
+  }
+
+  get isKing() {
+    return this.isKing;
   }
 
   /**
@@ -60,7 +74,7 @@ class WebSocketClient {
    * @param message
    */
   onConnection = (message) => {
-    console.log(message);
+    if (message) console.log(message);
     //console.log('open', message);
   };
 
@@ -100,7 +114,6 @@ class WebSocketClient {
    */
   sendMessage = (msg) => {
     const message = JSON.stringify({ ...msg, clientId: this.clientId });
-    console.log('Message: ', message);
     this.socketConnection.send(message);
   };
 
@@ -122,14 +135,15 @@ class WebSocketClient {
     term.cyan(`Character assigned: ${character.name} of team ${character.team}\n`);
   }
 
-  handleAssignedKing = ({ kingId }) => {
+  handleAssignedKing = ({ kingId, playersToSelect }) => {
     this.clientId === kingId
       ? this.isKing = true
       : this.isKing = false;
 
+    this.playersToSelect = playersToSelect;
+
     term.cyan(`King assigned: ${kingId}\n\n`);
   }
 }
-
 
 module.exports = WebSocketClient;

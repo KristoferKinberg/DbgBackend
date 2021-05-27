@@ -14,20 +14,24 @@ class Room {
 
   constructor({ id, client, messageHandler: { sendMessage, sendMessageToArr, registerRoom }}) {
     registerRoom(id, this.messageHandler);
+
     this.id = id;
     this.clients = [];
     this.owningClient = client;
     this.sendMessage = sendMessage;
     this.sendMessageToArr = sendMessageToArr;
-    this.messageHandlers = {
-      [wsA.JOIN_GAME]: this.addClient,
-      [wsA.START_GAME]: this.setAndStartGame,
-      [wsA.LEAVE_GAME]: this.removeClient
-    }
+    this.messageHandlers = this.getRoomMessageHandlers();
   }
 
+  getRoomMessageHandlers = () => ({
+    [wsA.JOIN_GAME]: this.addClient,
+    [wsA.START_GAME]: this.setAndStartGame,
+    [wsA.LEAVE_GAME]: this.removeClient
+  });
+
   messageHandler = ({ type, ...args }) => {
-    if (!type in this.messageHandlers) return term.bold.red(`Handler not found for type ${type}!`);
+    if (!this.messageHandlers.hasOwnProperty(type))
+      return term.bold.red(`Handler not found for type "${type}"\n`);
 
     this.messageHandlers[type](args);
   }
@@ -63,6 +67,18 @@ class Room {
   get owner (){
     return this.owningClient;
   }
+
+  /**
+   * Registers new messageHandlers to a room for eg. games to register their handlers
+   * @param newMessageHandlers
+   */
+  registerMessageHandlers = newMessageHandlers => {
+    this.messageHandlers = {
+      ...this.messageHandlers,
+      ...newMessageHandlers,
+      ...this.getRoomMessageHandlers(),
+    }
+  };
 
   /**
    * Returns an object with nessessary room data for clients
@@ -109,7 +125,7 @@ class Room {
    * @param clientId
    * @param client
    */
-  removeClient = ({ clientId, client }) => { // TODO: Wouldn't it be enpugh to simply supply client..?
+  removeClient = ({ clientId, client }) => { // TODO: Wouldn't it be enough to simply supply client..?
     const { [clientId]: toBeRemoved, ...rest } = this.clients;
 
     this.clients = rest;
@@ -128,7 +144,7 @@ class Room {
    */
   setAndStartGame = ({ game }) => {
     const Game = games[game];
-    this.game = SocketWrapper(Game, false)({ clients: this.clients });
+    this.game = SocketWrapper(Game, false)({ clients: this.clients, registerMessageHandlers: this.registerMessageHandlers });
     this.sendToClients(wsA.STARTED_GAME, { game });
   }
 }

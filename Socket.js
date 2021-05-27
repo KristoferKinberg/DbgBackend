@@ -5,6 +5,7 @@ const Clients = require('./Clients');
 const {getRoomByAbbrv} = require("./helpers");
 const {parseRoomAbbrv} = require("./helpers");
 const {HOST} = require("./constants");
+const term = require( 'terminal-kit' ).terminal;
 
 const mainFuncs = [
   wsA.RECONNECT,
@@ -63,7 +64,7 @@ const MessageHandlerWrapper = () => {
 
     if (!(roomId in rooms)) {
       term.bold.red(`Room not found! \n`);
-      term.red(`Room id: ${roomId}`);
+      term.red(`Room id: ${roomId}\n`);
     }
   }
 
@@ -101,12 +102,13 @@ const messageHandler = MessageHandlerWrapper();
 
 const SocketWrapper = (Class, forRoom = true) => (args) => {
   const { clients, registerRoom, ...rest } = messageHandler;
+
   return new Class({
     ...args,
     messageHandler: forRoom
       ? messageHandler
       : rest,
-  })
+  });
 };
 
 module.exports = SocketWrapper;

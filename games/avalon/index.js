@@ -13,21 +13,24 @@ class Avalon {
   rounds;
   sendMessage;
   sendMessageToArr;
+  registerMessageHandlers;
 
-  constructor({ clients, room, messageHandler: { sendMessage, sendMessageToArray }}) {
+  constructor({ clients, room, registerMessageHandlers, messageHandler: { sendMessage, sendMessageToArr }}) {
     console.log('Avalon games started');
 
     this.clients = clients;
-
     this.rounds = {};
     this.sendMessage = sendMessage;
-    this.sendMessageToArr = sendMessageToArray;
+    this.sendMessageToArr = sendMessageToArr;
+    this.registerMessageHandlers = registerMessageHandlers;
 
     this.assignCharacters();
     this.startGame();
   }
 
   getPlayersAsArray = () => Object.values(this.players);
+
+  getRoundNumber = () => Object.keys(this.rounds).length + 1;
 
   assignCharacters = () => {
     const teams = teamsGenerator(Object.keys(this.clients));
@@ -44,7 +47,11 @@ class Avalon {
   createNewRound = () => {
     this.rounds = {
       ...this.rounds,
-      [Object.keys(this.rounds)]: Round({ players: this.players }),
+      [Object.keys(this.rounds)]: Round({
+        players: this.players,
+        roundNumber: this.getRoundNumber(),
+        registerMessageHandlers: this.registerMessageHandlers,
+      }),
     }
   }
 

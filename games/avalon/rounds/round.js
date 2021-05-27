@@ -1,19 +1,42 @@
 const SocketWrapper = require("../../../Socket");
-const AvalonActions = require("../avalonActions");
+const aA = require("../avalonActions");
+const RoundsRules = require("./roundDetails");
 
 class Round {
   king;
   players;
   kingRound = 0;
+  roundDetails;
+  kingNominees;
+  registerMessageHandlers;
   sendMessage;
   sendMessageToArr;
 
-  constructor({ players, messageHandler: { sendMessage, sendMessageToArr }}) {
+  constructor({ players, roundNumber, registerMessageHandlers, messageHandler: { sendMessage, sendMessageToArr }}) {
     this.players = players;
     this.sendMessage = sendMessage;
     this.sendMessageToArr = sendMessageToArr;
+    this.roundDetails = RoundsRules[this.getPlayersAsArray().length][`q${roundNumber}`];
+
+    registerMessageHandlers(this.getMessageHandlers());
 
     this.startRound();
+  }
+
+  /**
+   * Returns object with messageHandlers for a round
+   * @returns {}
+   */
+  getMessageHandlers = () => ({
+    [aA.KINGS_ASSIGNED_CHARACTERS]: this.assignKingsNominees
+  });
+
+  /**
+   * Handles response from current king with the suggestion of players to go on mission
+   * @param args
+   */
+  assignKingsNominees = (...args) => {
+    console.log(args);
   }
 
   /**
@@ -59,8 +82,11 @@ class Round {
 
     this.sendMessageToArr({
       clients: this.getPlayerClients(),
-      type: AvalonActions.ASSIGNED_KING,
-      data: { kingId: this.getClientId(this.king )}
+      type: aA.ASSIGNED_KING,
+      data: {
+        kingId: this.getClientId(this.king),
+        playersToSelect: this.roundDetails.playersOnAssignment
+      }
     });
   };
 }

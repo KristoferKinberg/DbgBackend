@@ -133,4 +133,7 @@ const roundDetails = {
   },
 }
 
-module.exports = roundDetails;
+module.exports = {
+  maxAllowedFailedKingSelections: 5,
+  roundDetails
+};

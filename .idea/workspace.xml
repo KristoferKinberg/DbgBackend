@@ -117,14 +117,14 @@
       <change beforePath="$PROJECT_DIR$/../examination-web/src/test/resources/logback-test.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/Socket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feSim/TestSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/TestSocket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feSim/clientExtension.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/clientExtension.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feSim/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/feSim/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/avalon/avalonActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/avalonActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/avalon/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/avalon/rounds/round.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/rounds/round.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/avalon/rounds/roundDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/games/avalon/rounds/roundDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +185,7 @@
       <workItem from="1606141735934" duration="4000" />
       <workItem from="1606301868691" duration="25177000" />
       <workItem from="1621200232589" duration="57541000" />
-      <workItem from="1621688503602" duration="36688000" />
+      <workItem from="1621688503602" duration="65711000" />
     </task>
     <servers />
   </component>
@@ -205,6 +205,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="349" y="161" key="SettingsEditor" timestamp="1622332567755">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="349" y="161" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1622332567755" />
     <state x="2339" y="947" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1621623202872">
       <screen x="1440" y="625" width="2560" height="1415" />
     </state>
@@ -213,12 +217,12 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="641" y="443" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1680.1050@0.0.1680.1050" timestamp="1621585283878" />
-    <state x="2263" y="930" width="913" height="753" key="find.popup" timestamp="1622147577533">
-      <screen x="1440" y="586" width="2560" height="1440" />
+    <state x="540" y="251" width="599" height="548" key="find.popup" timestamp="1622414349086">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="540" y="251" width="599" height="548" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621535274166" />
+    <state x="540" y="251" width="599" height="548" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1622414349086" />
     <state x="540" y="251" width="599" height="548" key="find.popup/0.25.1680.940@0.25.1680.940" timestamp="1621322263499" />
-    <state x="2263" y="930" width="913" height="753" key="find.popup/1440.586.2560.1440/0.0.1440.2560@1440.586.2560.1440" timestamp="1622147577533" />
+    <state x="2263" y="930" width="913" height="753" key="find.popup/1440.586.2560.1440/0.0.1440.2560@1440.586.2560.1440" timestamp="1622152621755" />
     <state x="2263" y="949" width="913" height="739" key="find.popup/1440.611.2560.1415/0.25.1440.2451@1440.611.2560.1415" timestamp="1621785607437" />
     <state x="2263" y="949" width="913" height="739" key="find.popup/1440.611.2560.1415/0.25.1440.2454@1440.611.2560.1415" timestamp="1621811844047" />
     <state x="2263" y="949" width="913" height="739" key="find.popup/1440.611.2560.1415/0.25.1440.2457@1440.611.2560.1415" timestamp="1621690502290" />
@@ -227,11 +231,11 @@
       <screen x="1440" y="586" width="2560" height="1440" />
     </state>
     <state x="2384" y="637" key="run.anything.popup/1440.586.2560.1440/0.0.1440.2560@1440.586.2560.1440" timestamp="1621898365731" />
-    <state x="2206" y="902" width="1024" height="931" key="search.everywhere.popup" timestamp="1622140997598">
+    <state x="2206" y="902" width="1024" height="931" key="search.everywhere.popup" timestamp="1622314025598">
       <screen x="1440" y="586" width="2560" height="1440" />
     </state>
     <state x="503" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1621618549415" />
-    <state x="2206" y="902" width="1024" height="931" key="search.everywhere.popup/1440.586.2560.1440/0.0.1440.2560@1440.586.2560.1440" timestamp="1622140997598" />
+    <state x="2206" y="902" width="1024" height="931" key="search.everywhere.popup/1440.586.2560.1440/0.0.1440.2560@1440.586.2560.1440" timestamp="1622314025598" />
     <state x="2206" y="922" width="1024" height="914" key="search.everywhere.popup/1440.611.2560.1415/0.25.1440.2451@1440.611.2560.1415" timestamp="1621785602086" />
     <state x="2206" y="922" width="1024" height="914" key="search.everywhere.popup/1440.611.2560.1415/0.25.1440.2454@1440.611.2560.1415" timestamp="1621845648162" />
     <state x="2206" y="922" width="1024" height="914" key="search.everywhere.popup/1440.611.2560.1415/0.25.1440.2457@1440.611.2560.1415" timestamp="1621690499166" />

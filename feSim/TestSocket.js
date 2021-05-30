@@ -5,6 +5,7 @@ const { clientExtension } = require('./clientExtension');
 const clientIds = require('./clientIds');
 const term = require( 'terminal-kit' ).terminal ;
 const aA = require('../games/avalon/avalonActions');
+const { teams } = require('../games/avalon/characters');
 
 class WebSocketClient {
   logTestSocketMessages = false;
@@ -36,6 +37,8 @@ class WebSocketClient {
       [wsA.SUCCESSFULLY_JOINED]: this.onConnectToRoom,
       [aA.ASSIGNED_CHARACTER]: this.handleAssignedCharacter,
       [aA.ASSIGNED_KING]: this.handleAssignedKing,
+      [aA.REQUEST_VOTE_FOR_ASSIGNED_PLAYERS]: this.handleVoteRequest,
+      [aA.REQUEST_VOTE_FOR_MISSION]: this.handleMissionVoteRequest,
     });
 
     if (registerOnConnectionObject){
@@ -143,6 +146,19 @@ class WebSocketClient {
     this.playersToSelect = playersToSelect;
 
     term.cyan(`King assigned: ${kingId}\n\n`);
+  }
+
+  handleVoteRequest = ({ kingsNominees }) => {
+    //term.cyan(`Client recieved voterequest for ${kingsNominees}`);
+  };
+
+  handleMissionVoteRequest = (data) => {
+    console.log('Ball did reached its target', data);
+    this.sendMessage({
+      type: aA.VOTE_FOR_MISSION,
+      roomId: this.roomId,
+      voteForSuccess: true,
+    })
   }
 }
 

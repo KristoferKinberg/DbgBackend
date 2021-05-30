@@ -43,9 +43,20 @@ const getClientType = (rooms, clients, clientId) => {
   return false;
 };
 
+/**
+ * Returns a random boolean
+ *
+ * @param oddsTweak - Allows for tweeking of the odds in each way
+ * @returns {boolean}
+ */
+const getRandomBoolean = (oddsTweak = 0.5) => {
+  return Math.random() < oddsTweak;
+};
+
 module.exports = {
   uuidv4,
   parseRoomAbbrv,
   getRoomByAbbrv,
-  getClientType
+  getClientType,
+  getRandomBoolean
 }

@@ -1,6 +1,7 @@
 const WebSocket = require('ws');
 const wsA = require('../webSocketsActions');
 const WebSocketClient = require('./TestSocket');
+const {getRandomBoolean} = require("../helpers");
 const {HOST, PLAYER} = require("../constants");
 const term = require( 'terminal-kit' ).terminal ;
 const { hostExtFuncs } = require('./hostExtension');
@@ -37,7 +38,8 @@ const runHost = ({ functionName, ...rest}) => connections.HOST[functionName](res
  * @returns {number}
  */
 const runClients = ({ functionName, ...rest }) => Object.values(connections.PLAYERS)
-    .forEach(player => player[functionName](rest));
+    .forEach((player, index) => player[functionName]({ ...rest, index, players: connections.PLAYERS }));
+
 
 const clientLeaveGame = (index = 0) => () => {
   const { leaveGame, roomId } = Object.values(connections.PLAYERS)[index];
@@ -79,7 +81,11 @@ const testGameRun2 = [
   { target: playersConn(getConns()), msg: 'Connecting players', functionName: clientExtFuncs.registerOnConnectionObj, condition: clientsHaveRecievedIDs },
   { target: runClients, msg: 'Clients joining game', functionName: clientExtFuncs.joinGame },
   { target: runHost, msg: 'Starting game', functionName: hostExtFuncs.startGame },
-  { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection }
+  { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
+  { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: false },
+  { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
+  { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: true },
+  //{ target: }
 ];
 
 const testClientLeave = [

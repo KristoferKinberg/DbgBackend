@@ -106,10 +106,9 @@ class Avalon {
       [this.round]: endSummary
     };
 
-    if (this.gameHasFinished()) return;
+    if (this.gameHasFinished()) return console.log('THE GAME HAS FINISHED');
 
     this.startNewRound();
-    console.log(this.rounds);
   }
 }
 

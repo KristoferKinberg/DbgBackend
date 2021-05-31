@@ -34,22 +34,22 @@ class Main {
 
   /**
    * On reconnect
-   * @param socket
    * @param data
    */
-  reconnect = (socket, data) => {
-    const clients = this.clients.reconnectClient(data.clientId, data.newId);
-    const clientType = getClientType(this.rooms, this.clients, data.clientId);
+  reconnect = ({ roomId, newId, clientId, socket }) => {
+    const clients = this.clients.reconnectClient(clientId, newId);
+    const clientType = getClientType(this.rooms, this.clients, clientId);
+    const client = this.clients.getClient(clientId);
 
     if (clientType) {
       const roomId = clientType === HOST
-        ? data.clientId
-        : this.clients.getClient(data.clientId).belongsTo;
+        ? clientId
+        : client.belongsTo;
 
       this.sendMessage({
-        socket,
+        client,
         type: wsA.SUCCESSFULLY_RECONNECTED,
-        data: { clientType, ...this.rooms.getRoomDataObject(roomId)}
+        data: { clientType, ...this.rooms.getRoomDataObject(roomId) }
       });
     }
   };

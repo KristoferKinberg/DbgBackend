@@ -29,6 +29,11 @@ class Client {
     this.belongsTo = belongsTo;
     return this;
   }
+
+  updateSocket(newSocket){
+    this.socket = newSocket;
+    return this;
+  }
 }
 
 module.exports = Client;

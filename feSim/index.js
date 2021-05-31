@@ -11,7 +11,7 @@ const timer = ms => new Promise(res => setTimeout(res, ms))
 
 const connections = {
   HOST: null,
-  PLAYERS: null,
+  PLAYERS: {},
 }
 
 const registerOnConnectionObject = (client) => {
@@ -28,9 +28,10 @@ const connectHost = () => connections.HOST = createConnection(HOST);
 /**
  * Runs a host function
  * @param functionName
+ * @param rest
  * @returns {number}
  */
-const runHost = ({ functionName, ...rest}) => connections.HOST[functionName](rest);
+const runHost = ({ functionName, ...rest }) => connections.HOST[functionName](rest);
 
 /**
  * Run a client function for all clients
@@ -40,6 +41,7 @@ const runHost = ({ functionName, ...rest}) => connections.HOST[functionName](res
 const runClients = ({ functionName, ...rest }) => Object.values(connections.PLAYERS)
     .forEach((player, index) => player[functionName]({ ...rest, index, players: connections.PLAYERS }));
 
+const getPlayersObjectIds = () => Object.keys(connections.PLAYERS);
 
 const clientLeaveGame = (index = 0) => () => {
   const { leaveGame, roomId } = Object.values(connections.PLAYERS)[index];
@@ -54,14 +56,11 @@ const clientLeaveGame = (index = 0) => () => {
  * @returns {number}
  */
 const runClient = (playerIndexCallback) => ({ functionName, ...args }) =>
-  connections.PLAYERS[playerIndexCallback()][functionName]({ ...args, players: connections.PLAYERS });
+  Object.values(connections.PLAYERS)[playerIndexCallback()][functionName]({ ...args, players: connections.PLAYERS });
 
-const getKing = () => {
-  return Object
-    .values(connections.PLAYERS)
-    .find(Client => Client.isKing)
-    .clientId;
-}
+const getKing = () => Object
+  .values(connections.PLAYERS)
+  .findIndex(Client => Client.isKing);
 
 const clientsHaveRecievedIDs = () => {
   return connections.PLAYERS !== null
@@ -73,19 +72,38 @@ const playersConn = (conns) => ({functionName}) => {
   conns.forEach(conn => conn[functionName]());
 }
 
-const getConns = () => [...'a'.repeat(5)].map((item, index) => new WebSocketClient(PLAYER, index, registerOnConnectionObject));
+const getConns = () => [...'a'.repeat(5)].map((item, index) => new WebSocketClient(PLAYER, index, registerOnConnectionObject, getPlayersObjectIds ));
 
-const testGameRun2 = [
+const rounds = (roundsToRun, Rounds = []) => {
+  const roundsLeft = roundsToRun - 1;
+  if (roundsToRun === 0) return Rounds;
+
+  return rounds(roundsLeft, [
+    ...Rounds,
+    { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
+    { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: false },
+    { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
+    { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: true },
+  ]);
+}
+
+const doConnection = () => [
   { target: connectHost, msg: 'Connecting host', functionName: '' },
   { target: runHost, msg: 'Host creating server', functionName: hostExtFuncs.createServer },
   { target: playersConn(getConns()), msg: 'Connecting players', functionName: clientExtFuncs.registerOnConnectionObj, condition: clientsHaveRecievedIDs },
   { target: runClients, msg: 'Clients joining game', functionName: clientExtFuncs.joinGame },
   { target: runHost, msg: 'Starting game', functionName: hostExtFuncs.startGame },
-  { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
-  { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: false },
-  { target: runClient(getKing), msg: 'King selects players for mission', functionName: clientExtFuncs.kingPlayerSelection },
-  { target: runClients, msg: `Clients voting for King's nominees`, functionName: clientExtFuncs.voteForKingNominees, desiredResult: true },
-  //{ target: }
+]
+
+const testGameRun2 = [
+  ...doConnection(),
+  ...rounds(3),
+];
+
+const testClientReconnect = [
+  ...doConnection(),
+  { target: runClient(() => 0), msg: 'Client leaving game', functionName: clientExtFuncs.disconnect },
+  { target: runClient(() => 0), msg: 'Client reconnecting', functionName: clientExtFuncs.reconnect }
 ];
 
 const testClientLeave = [
@@ -114,5 +132,6 @@ const sleeper = async ([nextFunctionStack, ...functionStacks], isRerun = false) 
   })
 };
 
-sleeper(testGameRun2);
+//sleeper(testGameRun2);
+sleeper(testClientReconnect);
 

@@ -135,7 +135,7 @@ class Room {
     });
     this.sendMessageToArr({ clients: Object.values(this.clients), type: wsA.PLAYER_LEFT, players: Object.keys(this.clients) });
 
-    term.cyan(`Client ${clientId} left the game. \n\n Players left: ${Object.keys(this.clients)}`);
+    term.cyan(`Client ${clientId} left the game. \n\n Players still in game: ${Object.keys(this.clients)}`);
   }
 
   /**

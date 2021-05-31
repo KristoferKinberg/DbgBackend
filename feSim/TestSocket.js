@@ -8,26 +8,46 @@ const aA = require('../games/avalon/avalonActions');
 const { teams } = require('../games/avalon/characters');
 
 class WebSocketClient {
-  logTestSocketMessages = false;
+  logTestSocketMessages = true;
   socketConnection;
   messageHandlers;
   clientId;
   roomId;
+  type;
   playersInRoom;
   isKing;
   character;
   registerOnConnectionObject;
   playersToSelect;
+  getPlayersObjectIds;
+  newId;
 
-  constructor(type, clientIdIndex, registerOnConnectionObject = false) {
+  constructor(type, clientIdIndex, registerOnConnectionObject = false, getPlayersObjectIds = false) {
+    this.type = type;
+    this.openConnection();
+
+    if (getPlayersObjectIds){
+      this.getPlayersObjectIds = getPlayersObjectIds;
+    }
+
+    if (registerOnConnectionObject){
+      this.registerOnConnectionObject = registerOnConnectionObject;
+    }
+  }
+
+  _registerOnConnectionObject = () => {
+    this.registerOnConnectionObject(this);
+  }
+
+  openConnection = () => {
     this.socketConnection = new WebSocket('ws://localhost:8080');
-
-    const functionalityExtension = type === 'HOST'
-      ? hostExtension(this.sendMessage)
-      : clientExtension(this.sendMessage);
 
     this.socketConnection.on('open', this.onConnection);
     this.socketConnection.on('message', this.onMessage);
+
+    const functionalityExtension = this.type === 'HOST'
+      ? hostExtension(this.sendMessage)
+      : clientExtension(this.sendMessage);
 
     Object.keys(functionalityExtension)
       .forEach(handlerName => this[handlerName] = functionalityExtension[handlerName]);
@@ -40,14 +60,6 @@ class WebSocketClient {
       [aA.REQUEST_VOTE_FOR_ASSIGNED_PLAYERS]: this.handleVoteRequest,
       [aA.REQUEST_VOTE_FOR_MISSION]: this.handleMissionVoteRequest,
     });
-
-    if (registerOnConnectionObject){
-      this.registerOnConnectionObject = registerOnConnectionObject;
-    }
-  }
-
-  _registerOnConnectionObject = () => {
-    this.registerOnConnectionObject(this);
   }
 
   get isKing() {
@@ -97,7 +109,14 @@ class WebSocketClient {
    * @param clientId
    * @returns {*}
    */
-  onConnect = ({ clientId }) => this.clientId = clientId;
+  onConnect = ({ clientId }) => {
+    if (this.type === 'HOST') return this.clientId = clientId;
+    //if (this.getPlayersObjectIds().includes(this.clientId)) return console.log('mod this thing..?');
+
+    !this.clientId
+      ? this.clientId = clientId
+      : this.sendMessage({ type: wsA.RECONNECT, newId: clientId, roomId: this.roomId, clientId: this.clientId });
+  }
 
   /**
    * Runs through the message handlers
@@ -131,7 +150,6 @@ class WebSocketClient {
     };
   };
 
-  //handleAssignedCharacter = ({ character }) => {
   handleAssignedCharacter = (character) => {
     this.character = character;
 
@@ -153,7 +171,6 @@ class WebSocketClient {
   };
 
   handleMissionVoteRequest = (data) => {
-    console.log('Ball did reached its target', data);
     this.sendMessage({
       type: aA.VOTE_FOR_MISSION,
       roomId: this.roomId,

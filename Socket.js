@@ -57,8 +57,9 @@ const MessageHandlerWrapper = () => {
 
     const { type, ...data } = JSON.parse(message);
     const roomId = deriveRoomId(data);
+    console.log(message)
 
-    if (mainFuncs.includes(type)) return rooms.main({ type, roomId, ...data });
+    if (mainFuncs.includes(type)) return rooms.main({ type, roomId, ...data, socket });
 
     if (roomId in rooms) return rooms[roomId]({ type, roomId, client: socket, ...data });
 
@@ -88,7 +89,6 @@ const MessageHandlerWrapper = () => {
   const sendMessageToArr = ({ clients, type, data }) => {
     clients.forEach((client) => sendMessage({ client, type, data }));
   }
-
 
   return {
     sendMessage,

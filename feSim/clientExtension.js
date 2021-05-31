@@ -20,7 +20,16 @@ const getVotes = (numberOfPlayers, desiredResult) => [
 
 const clientExtension = (sendMessage) => ({
   joinGame: () => sendMessage({ type: wsA.JOIN_GAME, roomAbbrv: '54485' }),
-  leaveGame: ({ roomId }) => sendMessage({ type: wsA.LEAVE_GAME, roomId }),
+  reconnect: function (){ this.openConnection() },
+  disconnect: function() {
+    this.socketConnection.close();
+    this.socketConnection = null;
+  },
+  leaveGame: function(){
+    sendMessage({ type: wsA.LEAVE_GAME, roomId: this.roomId });
+    this.socketConnection.close();
+    this.socketConnection = null;
+  },
   registerOnConnectionObj: function (args){
     this._registerOnConnectionObject();
   },
